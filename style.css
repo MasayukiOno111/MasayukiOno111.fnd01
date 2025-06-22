@@ -1,0 +1,148 @@
+body {
+    background-color: #cce5ff; /* 全体の背景をブルー */
+    margin: 0;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left, .right {
+    width: 40%;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+.center {
+    width: 20%;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+.calc_form {
+    background: #eaf4ff;
+    padding: 10px 30px;
+}
+
+.result_form {
+    background: #eaf4ff;
+    padding: 10px 20px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.left-dl dt {
+    padding: 3px 0;
+    line-height: 40px;
+    float: left;
+}
+
+.left-dl dd {
+    padding: 10px 0;
+    margin: 0;
+    text-align: right;
+}
+
+.box {
+    box-sizing: border-box;
+    width: 150px;
+    height: 40px;
+    margin: 0;
+    padding: 0 10px;
+}
+
+.calc-btn {
+    width: 80px;
+    height: 30px;
+    border: 1px solid #333;
+}
+
+.calc-btn:hover {
+    cursor: pointer;
+}
+
+.chart-block {
+    margin-bottom: 20px;
+    background-color: white;  /* キャンバス周囲も白に */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.chart-with-values {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100% !important;
+}
+
+.chart-with-values canvas {
+    width: 100% !important;
+}
+
+.value-list {
+    margin: 0 10px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    min-width: 100px;
+}
+
+.centered-dl dt {
+    padding: 10px 0;
+    line-height: 40px;
+    float: left;
+}
+
+.centered-dl dd {
+    padding: 10px 0;
+    margin: 0px;
+    text-align: right;
+}
+
+.comment-table {   /*スラントの文字を上下で合わせる*/
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: sans-serif;
+  text-align: left;
+}
+
+.comment-table td {
+  padding: 0;
+}
+
+.game-btn {
+    display: block;      /* ブロック要素にする */
+    width: 80px;
+    height: 30px;
+    margin: 10px auto;   /* 上下 10px、左右 auto で中央寄せ */
+    border: 1px solid #333;
+}
+
+.green-box {
+    background-color:white;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border: 2px solid green; 
+    display: flex; /* 横方向に並べるためにflexboxを使用 */
+    justify-content: center; /* 中央に配置 */
+    align-items: center; /* 縦方向にも中央に配置 */
+}
+
+.gator-row {
+  display: flex;
+  justify-content: center; /* 中央寄せしたい場合 */
+  gap: 10px; /* ワニの間隔 */
+  margin-top: 10px;
+}
