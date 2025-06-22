@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <title>JavaScript計算結果表示</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>車両流れ量予測ツール</h1>
+  <div class="container">
+    <!-- 左：フォーム -->
+    <div class="left">
+      <form class="calc_form">
+        <dl class = "left-dl">
+          <dt>ギヤ比N：</dt> 
+          <dd><input type="number" class="box" id="N"></dd>
+
+          <dt>アシスト下流ねじり剛性＠下流(Nm/deg)Gml_：</dt>
+          <dd><input type="number" class="box" id="Gml_"></dd>
+
+          <dt>比スト(mm/rev)Rrp：</dt> 
+          <dd><input type="number" class="box" id="Rrp"></dd>
+
+          <dt>ギア支持剛性Kg：</dt>
+          <dd><input type="number" class="box" id="Kg"></dd>
+
+          <dt>サス分ねじり剛性＠下流（片輪）(Nm/deg)Gts_：</dt> 
+          <dd><input type="number" class="box" id="Gts_"></dd>
+
+          <dt>前輪荷重配分Dwf：</dt>
+          <dd><input type="number" class="box" id="Dwf"></dd>
+
+          <dt>車両重量(kg)m：</dt> 
+          <dd><input type="number" class="box" id="m"></dd>
+
+          <dt>ニューマチックトレール(m)Ct：</dt>
+          <dd><input type="number" class="box" id="Ct"></dd>
+
+          <dt>キャスタートレール(m)Pt：</dt>
+          <dd><input type="number" class="box" id="Pt"></dd>
+
+          <dt>リア正規化等価CP(1/rad)Cr：</dt>
+          <dd><input type="number" class="box" id="Cr"></dd>
+
+          <dt>フロント正規化等価CP（ねじり剛性除く）(1/rad)Cf：</dt>
+          <dd><input type="number" class="box" id="Cf"></dd>
+
+          <dt>ホイールベース(m)l：</dt>
+          <dd><input type="number" class="box" id="l"></dd>
+
+          <dt>車速(km/h)vh：</dt>
+          <dd><input type="number" class="box" id="vh"></dd> 
+        </dl>
+
+        <p>
+          <input type="button" class="calc-btn" value="計算" onclick="calculateAndDisplay()">
+        </p>
+
+        <p><!-- リセットボタン追加 -->
+          <input type="button" class="calc-btn" value="リセット" onclick="resetPage()">
+        </p>
+
+        <p ><!-- ゲームボタン追加 -->
+          <input type="button" id="game" class="game-btn" value="ゲーム" onclick="gamePage()" style="display: none;">
+        </p>
+
+        <!-- ワニ用の横並びコンテナを追加 -->
+        <div class="gator-row" style="display: none;">
+          <div class="green-box" id="gator1">🐊</div>
+          <div class="green-box" id="gator2">🐊</div>
+          <div class="green-box" id="gator3">🐊</div>
+          <div class="green-box" id="gator4">🐊</div>
+          <div class="green-box" id="gator5">🐊</div>
+        </div>
+        <!-- ワニをクリックしたら、イテ！表示用 -->
+        <div id="comment_gator" style="display: none;">コメント</div>
+
+        <!-- 制限時間カウントダウン表示 -->
+        <p id="timer" style="display: none;">残り時間: 5秒</p> 
+        <p id="scoreDisplay" style="display: none;">スコア: 0</p> <!-- 追加 -->
+        <p id="endMessage" style="display: none;">ゲーム終了！</p> <!-- あれば使える --> 
+
+      </form>
+    </div>
+
+    <!-- 中央：フォーム -->
+    <div class="center">
+      <form class="result_form">
+        <dl class="centered-dl">
+          <dt>判定：</dt>
+          <dd><input id="judge" class="box" type="text" readonly></dd>
+
+          <dt>スラント感度（-3%～3%）：</dt>
+          <dd><input id="kando" class="box" type="text" readonly></dd>
+        </dl>
+
+        <!-- 画像を追加 -->
+        <img id="resultImage" src="IMG_3232.jpg" 
+                          alt="Result Image" style="display: none; width: 100%; height: auto;">
+
+        <!-- コメント追加 スラントの文字を上下でピッタリ合わせたい-->
+        <table id="comment" class="comment-table" style="display: none;">
+          <tr><td>判定基準：</td><td>スラント-1～1で0.24以下</td></tr>
+          <tr><td></td><td>スラント感度0.24以下</td></tr>
+        </table>
+
+        <!--<div id="comment1" style="display: none;">コメント</div>-->
+        <div id="comment1" style="display: none; background-color:
+                           #ffeaea; padding: 10px; border-radius: 10px;">
+        </div>
+
+      </form>
+    </div>
+
+    <!-- 右：グラフ + 値表示 -->
+    <div class="right">
+
+      <div class="chart-block">
+        <label>手放し流れ計算1</label>
+        <div class="chart-with-values">
+          <ul class="value-list" id="values11"></ul>
+          <canvas id="chart1" width="400" height="370"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-block">
+        <label>手放し流れ計算2</label>
+        <div class="chart-with-values">
+          <ul class="value-list" id="values12"></ul>
+          <canvas id="chart2" width="400" height="370"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
